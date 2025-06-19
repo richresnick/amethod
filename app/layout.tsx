@@ -5,7 +5,6 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import ScrollToTop from "@/components/scroll-to-top"
 import { AuthProvider } from "@/contexts/auth-context"
 
 const inter = Inter({
@@ -35,7 +34,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${cormorant.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <ScrollToTop />
             <Navbar />
             <main className="min-h-screen">{children}</main>
             <Footer />

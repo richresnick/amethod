@@ -206,6 +206,53 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Competitive Advantages */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-cormorant">
+              What Sets Us Apart
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              The A/Method stands apart in the wellness marketplace through a combination of unique expertise, premium
+              quality, and personalized attention.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-4">
+            {[
+              {
+                title: "Founder Expertise",
+                description:
+                  "Francesca's unique background combines professional dance experience with extensive certifications in complementary wellness disciplines.",
+              },
+              {
+                title: "Premium Positioning",
+                description:
+                  "High-quality, personalized experiences that justify premium pricing in a market increasingly focused on quality over quantity.",
+              },
+              {
+                title: "Holistic Approach",
+                description:
+                  "Integration of movement, nutrition, and mindfulness creates a more comprehensive wellness experience than competitors focused solely on physical fitness.",
+              },
+              {
+                title: "Flexible Service Model",
+                description:
+                  "Multiple service options create resilience and allow clients to engage at various price points while maintaining brand consistency.",
+              },
+            ].map((advantage, index) => (
+              <div key={index} className="flex flex-col items-start">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-700">
+                  <span className="text-xl font-bold text-white">{index + 1}</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 font-cormorant">{advantage.title}</h3>
+                <p className="mt-2 text-slate-600">{advantage.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-32">
         <div className="absolute inset-0 z-0">

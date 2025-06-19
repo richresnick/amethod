@@ -122,9 +122,18 @@ export default function Navbar() {
                       </Button>
                     </>
                   ) : (
-                    <Button className="w-full bg-slate-400 text-slate-600 cursor-not-allowed" disabled>
-                      Login/Signup
-                    </Button>
+                    <>
+                      <Link
+                        href="/login"
+                        className="block rounded-md border border-input bg-background px-3 py-2 text-base font-medium text-slate-700 hover:bg-accent hover:text-accent-foreground"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Log in
+                      </Link>
+                      <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                        <Button className="mt-4 w-full bg-slate-700 hover:bg-slate-800">Sign up</Button>
+                      </Link>
+                    </>
                   )}
                 </div>
               </div>
@@ -160,9 +169,25 @@ export default function Navbar() {
               </Button>
             </>
           ) : (
-            <Button className="bg-slate-400 text-slate-600 cursor-not-allowed hover:bg-slate-400" disabled>
-              Login/Signup
-            </Button>
+            <>
+              <Link
+                href="/login"
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+                  isAtTop
+                    ? "border border-white text-white hover:bg-white/10"
+                    : "border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+                } h-10 px-4 py-2`}
+              >
+                Log in
+              </Link>
+              <Link href="/signup">
+                <Button
+                  className={isAtTop ? "bg-white text-slate-800 hover:bg-slate-200" : "bg-slate-800 hover:bg-slate-900"}
+                >
+                  Sign up
+                </Button>
+              </Link>
+            </>
           )}
         </div>
       </nav>

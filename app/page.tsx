@@ -29,12 +29,13 @@ export default function Home() {
               The A/Method by Francesca Antonacci is a holistic approach to wellness that combines movement,
               mindfulness, and nutrition to help you achieve balance and strength.
             </p>
-            <div className="mt-10 flex items-center justify-center">
-              <Link href="/services">
-                <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100">
-                  Get Started
-                </Button>
-              </Link>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100">
+                Get Started
+              </Button>
+              <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10 bg-slate-900/40">
+                Learn More
+              </Button>
             </div>
           </div>
         </div>
@@ -170,6 +171,39 @@ export default function Home() {
                 </Link>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-cormorant">
+              What Our Clients Say
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Hear from those who have experienced the transformative power of The A/Method.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="rounded-lg shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="h-2 w-8 bg-slate-700 rounded-full" />
+                  </div>
+                  <p className="text-slate-600 italic">
+                    "The A/Method has completely transformed my relationship with movement. Francesca's approach is
+                    holistic, thoughtful, and effective. I've never felt stronger or more connected to my body."
+                  </p>
+                  <div className="mt-6">
+                    <p className="font-medium text-slate-900">Sarah J.</p>
+                    <p className="text-sm text-slate-500">Client for 2 years</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
