@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   }
 
   // Dynamically import the Square SDK (avoids build-time crashes)
-  const { Client, Environment } = await import("@square/square")
+  const { Client, Environment } = await import("square")
 
   const squareClient = new Client({
     accessToken: SQUARE_ACCESS_TOKEN,
