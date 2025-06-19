@@ -1,24 +1,39 @@
 import { NextResponse } from "next/server"
-import { Client, Environment } from "square"
 
-// Initialize the Square client
-const squareClient = new Client({
-  accessToken: process.env.SQUARE_ACCESS_TOKEN,
-  environment: process.env.NODE_ENV === "production" ? Environment.Production : Environment.Sandbox,
-})
-
+// NOTE: Square SDK is loaded dynamically so a missing package or bad import
+//       will not break the build when the integration is not configured.
 export async function POST(request: Request) {
+  // Ensure required env vars exist
+  const { SQUARE_ACCESS_TOKEN, SQUARE_LOCATION_ID, NODE_ENV } = process.env
+  if (!SQUARE_ACCESS_TOKEN || !SQUARE_LOCATION_ID) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Square integration is not configured (missing SQUARE_ACCESS_TOKEN or SQUARE_LOCATION_ID).",
+      },
+      { status: 501 },
+    )
+  }
+
+  // Dynamically import the Square SDK (avoids build-time crashes)
+  const { Client, Environment } = await import("@square/square")
+
+  const squareClient = new Client({
+    accessToken: SQUARE_ACCESS_TOKEN,
+    environment: NODE_ENV === "production" ? Environment.Production : Environment.Sandbox,
+  })
+
   try {
     const { customerId, planId } = await request.json()
 
-    // Create a subscription
     const response = await squareClient.subscriptionsApi.createSubscription({
       idempotencyKey: `${customerId}-${planId}-${Date.now()}`,
-      locationId: process.env.SQUARE_LOCATION_ID!,
-      planId: planId,
-      customerId: customerId,
-      startDate: "2023-01-01", // You would use a dynamic date here
-      cardId: "CARD_ID", // You would get this from the payment form
+      locationId: SQUARE_LOCATION_ID,
+      planId,
+      customerId,
+      // In production calculate an appropriate start date & cardId
+      startDate: new Date().toISOString().split("T")[0],
+      cardId: "CARD_ID",
     })
 
     return NextResponse.json({
